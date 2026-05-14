@@ -1,0 +1,7 @@
+product,material,min_pct,max_pct
+brass,copper,0.20,0.50
+brass,zinc,0.50,0.80
+bronze,copper,0.60,0.80
+bronze,tin,0.20,0.40
+duralumin,copper,0.10,0.50
+duralumin,aluminium,0.50,0.90

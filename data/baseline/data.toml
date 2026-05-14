@@ -1,0 +1,11 @@
+[result]
+description = "baseline"
+result = "./result/baseline.log"
+
+[scalar]
+loss = 0.1
+
+[table_path]
+material = "material.csv"
+product = "product.csv"
+recipe = "recipe.csv"
