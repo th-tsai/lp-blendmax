@@ -1,0 +1,11 @@
+[result]
+description = "aluminium supply raised to 90,000 kg"
+result = "./result/case2.log"
+
+[scalar]
+loss = 0.1
+
+[table_path]
+material = "material.csv"
+product = "product.csv"
+recipe = "recipe.csv"
