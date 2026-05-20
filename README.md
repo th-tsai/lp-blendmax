@@ -75,15 +75,23 @@ $$
 
 ### Constraints
 
-$$\sum_{p:(p,m)\in A} x_{pm} \le S_m \quad \forall\, m \in M \quad \text{(supply)}$$
+**C1 — Material supply** (total usage of each material cannot exceed its monthly limit)
 
-$$\eta \sum_{m:(p,m)\in A} x_{pm} \le K_p \quad \forall\, p \in P \quad \text{(capacity)}$$
+$$\sum_{p:(p,m)\in A} x_{pm} \le S_m \quad \forall\, m \in M$$
 
-$$x_{pm} \;\ge\; \ell_{pm} \sum_{m':(p,m')\in A} x_{pm'} \quad \forall\,(p,m) \in A \quad \text{(prop.lb)}$$
+**C2 — Product capacity** (finished output, after yield loss, cannot exceed the production ceiling)
 
-$$x_{pm} \;\le\; u_{pm} \sum_{m':(p,m')\in A} x_{pm'} \quad \forall\,(p,m) \in A \quad \text{(prop.ub)}$$
+$$\eta \sum_{m:(p,m)\in A} x_{pm} \le K_p \quad \forall\, p \in P$$
 
-> The proportion bounds are non-linear as written but linearise by multiplying through by the total input $\sum_{m'} x_{pm'} > 0$.
+**C3 — Proportion lower bound** (material $m$ must comprise at least $\ell_{pm}$ of product $p$'s input)
+
+$$x_{pm} \;\ge\; \ell_{pm} \sum_{m':(p,m')\in A} x_{pm'} \quad \forall\,(p,m) \in A$$
+
+**C4 — Proportion upper bound** (material $m$ may not exceed $u_{pm}$ of product $p$'s input)
+
+$$x_{pm} \;\le\; u_{pm} \sum_{m':(p,m')\in A} x_{pm'} \quad \forall\,(p,m) \in A$$
+
+> C3 and C4 are linear: multiplying the proportional bounds through by the total input $\sum_{m'} x_{pm'} > 0$ yields linear constraints directly.
 
 ---
 
@@ -191,5 +199,3 @@ At this point, all three products have reached their production capacity limits.
 3. **Then secure copper to ~92,000 kg.** Once aluminium supply is resolved, topping up copper to the actual consumption level unlocks a further £49,000 per month. Do not order beyond ~92,000 kg — the solver confirms additional copper sits unused.
 
 4. **Beyond these two steps, further gains require production investment, not procurement.** Once materials are right-sized, all three product lines are running at full capacity. The largest opportunity is bronze: expanding bronze production capacity is worth approximately £7.11 per additional kilogram of throughput. This is a capital investment question, not a purchasing one.
-
----
