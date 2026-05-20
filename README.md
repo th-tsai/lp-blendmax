@@ -199,5 +199,3 @@ At this point, all three products have reached their production capacity limits.
 3. **Then secure copper to ~92,000 kg.** Once aluminium supply is resolved, topping up copper to the actual consumption level unlocks a further £49,000 per month. Do not order beyond ~92,000 kg — the solver confirms additional copper sits unused.
 
 4. **Beyond these two steps, further gains require production investment, not procurement.** Once materials are right-sized, all three product lines are running at full capacity. The largest opportunity is bronze: expanding bronze production capacity is worth approximately £7.11 per additional kilogram of throughput. This is a capital investment question, not a purchasing one.
-
----
