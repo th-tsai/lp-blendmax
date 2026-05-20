@@ -69,7 +69,7 @@ The goal is to find the monthly production plan that maximises profit.
 ### Objective — maximise profit
 
 $$
-\max \quad \eta \sum_{p \in P} s_p \sum_{m \in M} x_{p,m} \;-\; \sum_{m \in M} c_m \sum_{p \in P} x_{p,m}
+\max \quad \eta \sum_{p \in P} s_p \sum_{m \in M} x_{p,m} - \sum_{m \in M} c_m \sum_{p \in P} x_{p,m}
 $$
 
 ### Constraints
@@ -84,11 +84,11 @@ $$\eta \sum_{m \in M} x_{p,m} \le K_p \quad \forall p \in P$$
 
 **C3 — Proportion lower bound** (material $m$ must comprise at least $\ell_{p,m}$ of product $p$'s input)
 
-$$x_{p,m} \;\ge\; \ell_{p,m} \sum_{m' \in M} x_{p, m'} \quad \forall p \in P, m \in M$$
+$$x_{p,m} \ge \ell_{p,m} \sum_{m' \in M} x_{p, m'} \quad \forall p \in P, m \in M$$
 
 **C4 — Proportion upper bound** (material $m$ may not exceed $u_{p,m}$ of product $p$'s input)
 
-$$x_{p,m} \;\le\; u_{p,m} \sum_{m' \in M} x_{p,m'} \quad \forall p \in P, m \in M$$
+$$x_{p,m} \le u_{p,m} \sum_{m' \in M} x_{p,m'} \quad \forall p \in P, m \in M$$
 
 > C3 and C4 are linear: multiplying the proportional bounds through by the total input $\sum_{m'} x_{p,m'} > 0$ yields linear constraints directly.
 
