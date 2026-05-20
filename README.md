@@ -42,56 +42,55 @@ The goal is to find the monthly production plan that maximises profit.
 
 ### Sets and indices
 
-| Symbol                   | Definition                                       |
-| ------------------------ | ------------------------------------------------ |
-| $P$                      | set of products                                  |
-| $M$                      | set of materials                                 |
-| $A \subseteq P \times M$ | allowed (product, material) pairs — blend recipe |
-| $p, m$                   | indices over $P$, $M$                            |
+| Symbol | Definition            |
+| ------ | --------------------- |
+| $P$    | set of products       |
+| $M$    | set of materials      |
+| $p, m$ | indices over $P$, $M$ |
 
 ### Parameters
 
-| Symbol      | Meaning                                 |
-| ----------- | --------------------------------------- |
-| $\eta$      | yield factor                            |
-| $c_m$       | cost of material $m$ (£/kg)             |
-| $S_m$       | supply of material $m$ (kg)             |
-| $s_p$       | sell price of product $p$ (£/kg)        |
-| $K_p$       | production capacity of product $p$ (kg) |
-| $\ell_{pm}$ | min proportion of $m$ in $p$            |
-| $u_{pm}$    | max proportion of $m$ in $p$            |
+| Symbol       | Meaning                                 |
+| ------------ | --------------------------------------- |
+| $\eta$       | yield factor                            |
+| $c_m$        | cost of material $m$ (£/kg)             |
+| $S_m$        | supply of material $m$ (kg)             |
+| $s_p$        | sell price of product $p$ (£/kg)        |
+| $K_p$        | production capacity of product $p$ (kg) |
+| $\ell_{p,m}$ | min proportion of $m$ in $p$            |
+| $u_{p,m}$    | max proportion of $m$ in $p$            |
 
 ### Decision variables
 
-| Symbol         | Meaning                                              |
-| -------------- | ---------------------------------------------------- |
-| $x_{pm} \ge 0$ | kg of material $m$ used in product $p$, $(p,m)\in A$ |
+| Symbol          | Meaning                                |
+| --------------- | -------------------------------------- |
+| $x_{p,m} \ge 0$ | kg of material $m$ used in product $p$ |
 
 ### Objective — maximise profit
 
 $$
-\max \quad \eta \sum_{p \in P} s_p \sum_{m:(p,m)\in A} x_{pm} \;-\; \sum_{m \in M} c_m \sum_{p:(p,m)\in A} x_{pm}
+\max \quad \eta \sum_{p \in P} s_p \sum_{m \in M} x_{p,m} \;-\; \sum_{m \in M} c_m \sum_{p \in P} x_{p,m}
 $$
 
 ### Constraints
 
 **C1 — Material supply** (total usage of each material cannot exceed its monthly limit)
 
-$$\sum_{p:(p,m)\in A} x_{pm} \le S_m \quad \forall\, m \in M$$
+$$\sum_{p \in A} x_{p,m} \le S_m \quad \forall m \in M$$
 
 **C2 — Product capacity** (finished output, after yield loss, cannot exceed the production ceiling)
 
-$$\eta \sum_{m:(p,m)\in A} x_{pm} \le K_p \quad \forall\, p \in P$$
+$$\eta \sum_{m \in M} x_{p,m} \le K_p \quad \forall p \in P$$
 
-**C3 — Proportion lower bound** (material $m$ must comprise at least $\ell_{pm}$ of product $p$'s input)
+**C3 — Proportion lower bound** (material $m$ must comprise at least $\ell_{p,m}$ of product $p$'s input)
 
-$$x_{pm} \;\ge\; \ell_{pm} \sum_{m':(p,m')\in A} x_{pm'} \quad \forall\,(p,m) \in A$$
+$$x_{p,m} \;\ge\; \ell_{p,m} \sum_{m' \in M} x_{p, m'} \quad \forall p \in P, m \in M$$
 
-**C4 — Proportion upper bound** (material $m$ may not exceed $u_{pm}$ of product $p$'s input)
+**C4 — Proportion upper bound** (material $m$ may not exceed $u_{p,m}$ of product $p$'s input)
 
-$$x_{pm} \;\le\; u_{pm} \sum_{m':(p,m')\in A} x_{pm'} \quad \forall\,(p,m) \in A$$
+$$x_{p,m} \;\le\; u_{p,m} \sum_{m' \in M} x_{p,m'} \quad \forall p \in P, m \in M$$
 
-> C3 and C4 are linear: multiplying the proportional bounds through by the total input $\sum_{m'} x_{pm'} > 0$ yields linear constraints directly.
+> C3 and C4 are linear: multiplying the proportional bounds through by the total input $\sum_{m'} x_{p,m'} > 0$ yields linear constraints directly.
 
 ---
 
